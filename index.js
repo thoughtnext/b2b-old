@@ -10,6 +10,8 @@ const app = express();
     app.use(bodyParser.urlencoded({
         extended: true
     }));
+        app.set('port', process.env.PORT || 3000)
+
 // Returns TwiML which prompts the caller to record a message
 app.post('/record', (request, response) => {
   // Use the Twilio Node.js SDK to build an XML response
@@ -64,7 +66,9 @@ console.log(response)
 
 });
 // Create an HTTP server and listen for requests on port 3000
-app.listen(3000);
+   app.listen(app.get('port'), function() {
+        console.log('Server listening on ', app.get('port'))
+    })
 
 
 
