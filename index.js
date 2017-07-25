@@ -36,7 +36,8 @@ var from=req.body.From
 var to=req.body.To
 var TranscriptionText=req.body.TranscriptionText
 var rec_url=req.body.RecordingUrl
-var uri=rec_url.replace("https://api.twilio.com","")
+var rec=rec_url.replace("https://api.twilio.com","")
+var uri=rec+".json"
 if(from='+19188622354'){
   var industry="education"
 
