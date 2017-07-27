@@ -314,4 +314,168 @@ Adapter.prototype.dbdetails = function(pnum,callback) {
   console.log("getBotUser function finished")
   return deferred.promise;
 }
+Adapter.prototype.loginvalidation = function(email, password, callback) {
+
+  const query = "SELECT * " +
+    "FROM admin " +
+    "WHERE email = " + this.db.escape(email) + " And password =" + this.db.escape(password)
+  console.log(query)
+  var deferred = Q.defer();
+  this.db.getConnection(function(err, connection) {
+    if (err) {
+      console.log(err)
+      deferred.reject(err);
+    } else {
+      console.log("conn successful")
+      connection.query(query, [], function(err, results) {
+        connection.release();
+        if (err) {
+          console.log(err)
+          deferred.reject(err);
+        } else {
+          callback(results)
+
+          deferred.resolve(results);
+        }
+      });
+    }
+  });
+  console.log("getBotUser function finished")
+  return deferred.promise;
+}
+
+Adapter.prototype.insert_industry_expert_details = function(name, industry, phone_number, callback) {
+  console.log(name, industry, phone_number)
+    // return true;
+
+
+
+  const query = "INSERT INTO industry_expert_details(name,industry,phone_number1)" +
+    "VALUES( " + this.db.escape(name) + "," + this.db.escape(industry) + "," + this.db.escape(phone_number) + ")";
+  console.log(query)
+  var deferred = Q.defer();
+  this.db.getConnection(function(err, connection) {
+    if (err) {
+      deferred.reject(err);
+    } else {
+      connection.query(query, [], function(err, results) {
+        connection.release();
+        if (err) {
+          deferred.reject(err);
+          callback({
+            code: "400",
+            error: err
+          })
+        } else {
+          // console.log(results)
+          callback({
+              code: "200",
+              result: results
+            })
+            // callback(results)2h98ckc3
+            // deferred.resolve(results);
+        }
+      });
+    }
+  });
+  console.log("getBotUser function finished")
+  return deferred.promise;
+}
+Adapter.prototype.update_industry_expert_details = function(ext_name, name, industry, phone_number, callback) {
+  console.log(ext_name, name, industry, phone_number)
+
+
+
+  const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry=" + this.db.escape(industry) + ",phone_number1=" + this.db.escape(phone_number) + " WHERE name= " + this.db.escape(ext_name)
+
+  var deferred = Q.defer();
+  this.db.getConnection(function(err, connection) {
+    if (err) {
+      deferred.reject(err);
+    } else {
+      connection.query(query, [], function(err, results) {
+        connection.release();
+        if (err) {
+          deferred.reject(err);
+          callback({
+            code: 400,
+            success: "false"
+          })
+        } else {
+          // console.log(results)
+          callback({
+            code: 200,
+            success: "true"
+          })
+
+          // deferred.resolve(results);
+        }
+      });
+    }
+  });
+  console.log("getBotUser function finished")
+  return deferred.promise;
+}
+Adapter.prototype.update_industry_expert_details_p2 = function(ext_name, name, industry, phone_number1, phone_number2, callback) {
+  const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry=" + this.db.escape(industry) + ",phone_number1=" + this.db.escape(phone_number1) + ",phone_number2=" + this.db.escape(phone_number2) + " WHERE name= " + this.db.escape(ext_name)
+  console.log(query)
+  var deferred = Q.defer();
+  this.db.getConnection(function(err, connection) {
+    if (err) {
+      deferred.reject(err);
+    } else {
+      connection.query(query, [], function(err, results) {
+        connection.release();
+        if (err) {
+          deferred.reject(err);
+          callback({
+            code: 400,
+            success: "false"
+          })
+        } else {
+          // console.log(results)
+          callback({
+            code: 200,
+            success: "true"
+          })
+
+          // deferred.resolve(results);
+        }
+      });
+    }
+  });
+  console.log("getBotUser function finished")
+  return deferred.promise;
+}
+Adapter.prototype.update_industry_expert_details_p3 = function(ext_name, name, industry, phone_number1, phone_number2,phone_number3,callback) {
+  const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry=" + this.db.escape(industry) + ",phone_number1=" + this.db.escape(phone_number1) + ",phone_number2=" + this.db.escape(phone_number2) + ",phone_number3=" + this.db.escape(phone_number3) + " WHERE name= " + this.db.escape(ext_name)
+  console.log(query)
+  var deferred = Q.defer();
+  this.db.getConnection(function(err, connection) {
+    if (err) {
+      deferred.reject(err);
+    } else {
+      connection.query(query, [], function(err, results) {
+        connection.release();
+        if (err) {
+          deferred.reject(err);
+          callback({
+            code: 400,
+            success: "false"
+          })
+        } else {
+          // console.log(results)
+          callback({
+            code: 200,
+            success: "true"
+          })
+
+          // deferred.resolve(results);
+        }
+      });
+    }
+  });
+  console.log("getBotUser function finished")
+  return deferred.promise;
+}
 module.exports = Adapter;
