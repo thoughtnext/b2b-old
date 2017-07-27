@@ -285,4 +285,33 @@ Adapter.prototype.inserttranscriptions = function(rsid,trans_text,callback) {
   console.log("getBotUser function finished")
   return deferred.promise;
 }
+Adapter.prototype.dbdetails = function(pnum,callback) {
+
+  const query = "SELECT * " +
+    "FROM industry_expert_details " +
+    "WHERE phone_number2=" + this.db.escape(pnum)+" OR phone_number3=" + this.db.escape(pnum)+ " OR phone_number1=" + this.db.escape(pnum)
+  console.log(query)
+  var deferred = Q.defer();
+  this.db.getConnection(function(err, connection) {
+    if (err) {
+      console.log(err)
+      deferred.reject(err);
+    } else {
+      console.log("conn successful")
+      connection.query(query, [], function(err, results) {
+        connection.release();
+        if (err) {
+          console.log(err)
+          deferred.reject(err);
+        } else {
+          callback(results)
+     
+          deferred.resolve(results);
+        }
+      });
+    }
+  });
+  console.log("getBotUser function finished")
+  return deferred.promise;
+}
 module.exports = Adapter;
