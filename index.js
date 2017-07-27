@@ -7,9 +7,14 @@ const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
 const app = express();
 var bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
+// app.use(bodyParser.urlencoded({
+// 	extended: true
+// }));
+var urlencodedParser = bodyParser.urlencoded({
+	extended: false
+})
+app.use(bodyParser.json())
+
 app.set('port', process.env.PORT || 3000)
 
 // Returns TwiML which prompts the caller to record a message
