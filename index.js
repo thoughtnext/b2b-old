@@ -71,7 +71,8 @@ app.post('/handle_transcribe', function(req, res) {
 });
 
 app.post('/loginvalidation', function(req, res) {
-
+var email=req.body.email
+var password=req.body.password
 	db.loginvalidation(email, password, function(response) {
 		console.log(response)
 		if (response == "") {
