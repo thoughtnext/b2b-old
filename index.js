@@ -7,9 +7,9 @@ const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
 const app = express();
 var bodyParser = require('body-parser')
-// app.use(bodyParser.urlencoded({
-// 	extended: true
-// }));
+	// app.use(bodyParser.urlencoded({
+	// 	extended: true
+	// }));
 var urlencodedParser = bodyParser.urlencoded({
 	extended: false
 })
@@ -89,8 +89,8 @@ app.post('/handle_transcribe', function(req, res) {
 });
 
 app.post('/loginvalidation', function(req, res) {
-var email=req.body.email
-var password=req.body.password
+	var email = req.body.email
+	var password = req.body.password
 	db.loginvalidation(email, password, function(response) {
 		console.log(response)
 		if (response == "") {
@@ -106,6 +106,15 @@ var password=req.body.password
 			})
 		}
 
+	})
+})
+app.get('/expertdetails',function(req,res){
+	db.expertdetails(function(response){
+		console.log(response)
+		// res.send(response)
+		if(response.code==200){
+			res.send(response.result)
+		}
 	})
 })
 app.post('/insert_expert_details', function(req, res) {
@@ -131,41 +140,42 @@ app.post('/insert_expert_details', function(req, res) {
 });
 app.post('/edit_expert_details', function(req, res) {
 	console.log(req.body)
-	var ext_name=req.body.extname
+	var ext_name = req.body.extname
 	var new_name = req.body.name
-	var new_phone_number1 =req.body.phone_number1
-	var new_phone_number2=req.body.phone_number2
-	var new_phone_number3=req.body.phone_number3
+	var new_phone_number1 = req.body.phone_number1
+	var new_phone_number2 = req.body.phone_number2
+	var new_phone_number3 = req.body.phone_number3
 	var new_industry = req.body.industry
-	console.log(ext_name,new_name,new_industry,new_phone_number1,new_phone_number2, new_phone_number3)
-	if(new_phone_number1 &&new_phone_number2&&new_phone_number3){
+	console.log(ext_name, new_name, new_industry, new_phone_number1, new_phone_number2, new_phone_number3)
+	if (new_phone_number1 && new_phone_number2 && new_phone_number3) {
 		console.log("3")
-			db.update_industry_expert_details_p3(ext_name,new_name, new_industry, new_phone_number1,new_phone_number2,new_phone_number3,function(response){
-		console.log(response)
-		res.json(response)
-	})
-	}else if(new_phone_number1 &&new_phone_number2){
+		db.update_industry_expert_details_p3(ext_name, new_name, new_industry, new_phone_number1, new_phone_number2, new_phone_number3, function(response) {
+			console.log(response)
+			res.json(response)
+		})
+	} else if (new_phone_number1 && new_phone_number2) {
 		console.log("2")
-			db.update_industry_expert_details_p2(ext_name,new_name, new_industry, new_phone_number1,new_phone_number2,function(response){
-		console.log(response)
-		res.json(response)
-	})
-	}else if(new_phone_number1){
+		db.update_industry_expert_details_p2(ext_name, new_name, new_industry, new_phone_number1, new_phone_number2, function(response) {
+			console.log(response)
+			res.json(response)
+		})
+	} else if (new_phone_number1) {
 		console.log("1")
-		db.update_industry_expert_details(ext_name,new_name, new_industry, new_phone_number1,function(response){
-		console.log(response)
-		res.json(response)
-	})
+		db.update_industry_expert_details(ext_name, new_name, new_industry, new_phone_number1, function(response) {
+			console.log(response)
+			res.json(response)
+		})
 
 	}
 	return true;
 })
-app.get('/check',function(req,res){
-	db.dbdetails("+19188622354",function(response){
-console.log(response)
-	});
-})
-// Create an HTTP server and listen for requests on port 3000
+app.get('/check', function(req, res) {
+		db.dbdetails("+19188622354", function(response) {
+			console.log(response)
+	
+		});
+	})
+	// Create an HTTP server and listen for requests on port 3000
 app.listen(app.get('port'), function() {
 	console.log('Server listening on ', app.get('port'))
 })

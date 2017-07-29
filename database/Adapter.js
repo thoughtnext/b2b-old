@@ -478,4 +478,35 @@ Adapter.prototype.update_industry_expert_details_p3 = function(ext_name, name, i
   console.log("getBotUser function finished")
   return deferred.promise;
 }
+Adapter.prototype.expertdetails = function(callback) {
+
+  const query = "SELECT * " +
+    "FROM industry_expert_details "
+   
+  console.log(query)
+  var deferred = Q.defer();
+  this.db.getConnection(function(err, connection) {
+    if (err) {
+      console.log(err)
+      deferred.reject(err);
+    } else {
+      console.log("conn successful")
+      connection.query(query, [], function(err, results) {
+        connection.release();
+        if (err) {
+          console.log(err)
+          deferred.reject(err);
+          callback({code:400,result:err})
+        } else {
+          callback(results)
+               callback({code:200,result:results})
+
+          deferred.resolve(results);
+        }
+      });
+    }
+  });
+  console.log("getBotUser function finished")
+  return deferred.promise;
+}
 module.exports = Adapter;
