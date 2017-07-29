@@ -15,6 +15,19 @@ var urlencodedParser = bodyParser.urlencoded({
 })
 app.use(bodyParser.json())
 
+var allowCrossDomain = function(req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+	res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER');
+	if ('OPTIONS' === req.method) {
+		res.sendStatus(200);
+	} else {
+		next();
+	}
+};
+
+app.use(allowCrossDomain);
+
 app.set('port', process.env.PORT || 3000)
 
 // Returns TwiML which prompts the caller to record a message
