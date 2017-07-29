@@ -130,7 +130,7 @@ app.post('/insert_expert_details', function(req, res) {
 	console.log(e_name, e_phone_number1, e_phone_number2, e_phone_number3, e_industry)
 	if (e_phone_number1 && e_phone_number2 && e_phone_number3) {
 		console.log("3")
-db.insert_industry_expert_details(e_name, e_industry, e_phone_number1,e_phone_number3, function(response) {
+		db.insert_industry_expert_details3(e_name, e_industry, e_phone_number1, e_phone_number2, e_phone_number3, function(response) {
 			console.log(response)
 			if (response.code == "200") {
 				res.json({
@@ -146,7 +146,7 @@ db.insert_industry_expert_details(e_name, e_industry, e_phone_number1,e_phone_nu
 		});
 	} else if (e_phone_number1 && e_phone_number2) {
 		console.log("2")
-db.insert_industry_expert_details(e_name, e_industry, e_phone_number1,e_phone_number2, function(response) {
+		db.insert_industry_expert_details2(e_name, e_industry, e_phone_number1, e_phone_number2, function(response) {
 			console.log(response)
 			if (response.code == "200") {
 				res.json({

@@ -49,7 +49,7 @@ Adapter.prototype.getdetails = function(sid, callback) {
           deferred.reject(err);
         } else {
           callback(results)
-     
+
           deferred.resolve(results);
         }
       });
@@ -78,7 +78,7 @@ Adapter.prototype.getTransdetails = function(rsid, callback) {
           deferred.reject(err);
         } else {
           callback(results)
-     
+
           deferred.resolve(results);
         }
       });
@@ -88,64 +88,64 @@ Adapter.prototype.getTransdetails = function(rsid, callback) {
   return deferred.promise;
 }
 
-Adapter.prototype.insert = function(industry,call_sid,from_number,to_number,uri,transcription,positivity,negativity,neutrality,label,callback) {
-  
-console.log("-----------===",industry,call_sid,from_number,to_number,uri,transcription,positivity,negativity,neutrality,label)
+Adapter.prototype.insert = function(industry, call_sid, from_number, to_number, uri, transcription, positivity, negativity, neutrality, label, callback) {
 
-    const query = "INSERT INTO alexa_recordings(industry,call_sid,from_number,to_number,uri,transcription,sentiment_positivity,sentiment_negitivity,sentiment_nutrality,label)" +
-      "VALUES( " + this.db.escape(industry) + "," + this.db.escape(call_sid) + "," + this.db.escape(from_number) + "," + this.db.escape(to_number) + "," + this.db.escape(uri) + "," + this.db.escape(transcription) + "," + this.db.escape(positivity) +"," + this.db.escape(negativity) +"," + this.db.escape(neutrality) +"," + this.db.escape(label) +")";
-   console.log(query)
-    var deferred = Q.defer();
-    this.db.getConnection(function(err, connection) {
-      if (err) {
-        deferred.reject(err);
-      } else {
-        connection.query(query, [], function(err, results) {
-          connection.release();
-          if (err) {
-            deferred.reject(err);
-          } else {
-            // console.log(results)
-            callback(results)
-              // deferred.resolve(results);
-          }
-        });
-      }
-    });
-    console.log("getBotUser function finished")
-    return deferred.promise;
-  }
-  Adapter.prototype.insertDetails = function(industry,call_sid,from_number,to_number,callback) {
-  console.log(industry,call_sid,from_number,to_number)
-  // return true;
+  console.log("-----------===", industry, call_sid, from_number, to_number, uri, transcription, positivity, negativity, neutrality, label)
+
+  const query = "INSERT INTO alexa_recordings(industry,call_sid,from_number,to_number,uri,transcription,sentiment_positivity,sentiment_negitivity,sentiment_nutrality,label)" +
+    "VALUES( " + this.db.escape(industry) + "," + this.db.escape(call_sid) + "," + this.db.escape(from_number) + "," + this.db.escape(to_number) + "," + this.db.escape(uri) + "," + this.db.escape(transcription) + "," + this.db.escape(positivity) + "," + this.db.escape(negativity) + "," + this.db.escape(neutrality) + "," + this.db.escape(label) + ")";
+  console.log(query)
+  var deferred = Q.defer();
+  this.db.getConnection(function(err, connection) {
+    if (err) {
+      deferred.reject(err);
+    } else {
+      connection.query(query, [], function(err, results) {
+        connection.release();
+        if (err) {
+          deferred.reject(err);
+        } else {
+          // console.log(results)
+          callback(results)
+            // deferred.resolve(results);
+        }
+      });
+    }
+  });
+  console.log("getBotUser function finished")
+  return deferred.promise;
+}
+Adapter.prototype.insertDetails = function(industry, call_sid, from_number, to_number, callback) {
+  console.log(industry, call_sid, from_number, to_number)
+    // return true;
 
 
-    const query = "INSERT INTO alexa_recordings(industry,call_sid,from_number,to_number)" +
-      "VALUES( " + this.db.escape(industry) + "," + this.db.escape(call_sid) + "," + this.db.escape(from_number) + "," + this.db.escape(to_number) + ")";
-   console.log(query)
-    var deferred = Q.defer();
-    this.db.getConnection(function(err, connection) {
-      if (err) {
-        deferred.reject(err);
-      } else {
-        connection.query(query, [], function(err, results) {
-          connection.release();
-          if (err) {
-            deferred.reject(err);
-          } else {
-            // console.log(results)
-            callback(results)
-              // deferred.resolve(results);
-          }
-        });
-      }
-    });
-    console.log("getBotUser function finished")
-    return deferred.promise;
-  }
-  Adapter.prototype.updateDetails = function(call_sid,uri,rsid,callback) {
- const query = 'UPDATE alexa_recordings SET uri='+ this.db.escape(uri) +',rsid='+ this.db.escape(rsid) +' WHERE call_sid=' +  this.db.escape(call_sid)  + ';'
- console.log(query)
+  const query = "INSERT INTO alexa_recordings(industry,call_sid,from_number,to_number)" +
+    "VALUES( " + this.db.escape(industry) + "," + this.db.escape(call_sid) + "," + this.db.escape(from_number) + "," + this.db.escape(to_number) + ")";
+  console.log(query)
+  var deferred = Q.defer();
+  this.db.getConnection(function(err, connection) {
+    if (err) {
+      deferred.reject(err);
+    } else {
+      connection.query(query, [], function(err, results) {
+        connection.release();
+        if (err) {
+          deferred.reject(err);
+        } else {
+          // console.log(results)
+          callback(results)
+            // deferred.resolve(results);
+        }
+      });
+    }
+  });
+  console.log("getBotUser function finished")
+  return deferred.promise;
+}
+Adapter.prototype.updateDetails = function(call_sid, uri, rsid, callback) {
+  const query = 'UPDATE alexa_recordings SET uri=' + this.db.escape(uri) + ',rsid=' + this.db.escape(rsid) + ' WHERE call_sid=' + this.db.escape(call_sid) + ';'
+  console.log(query)
   var deferred = Q.defer();
   this.db.getConnection(function(err, connection) {
     if (err) {
@@ -172,10 +172,10 @@ console.log("-----------===",industry,call_sid,from_number,to_number,uri,transcr
   console.log("getBotUser function finished")
   return deferred.promise;
 }
- Adapter.prototype.updatetrans_text = function(rsid,tran_text,callback) {
+Adapter.prototype.updatetrans_text = function(rsid, tran_text, callback) {
 
- const query = 'UPDATE alexa_transcriptions SET transcription='+ this.db.escape(tran_text) +' WHERE rsid=' +  this.db.escape(rsid)  + ';'
- console.log(query)
+  const query = 'UPDATE alexa_transcriptions SET transcription=' + this.db.escape(tran_text) + ' WHERE rsid=' + this.db.escape(rsid) + ';'
+  console.log(query)
   var deferred = Q.defer();
   this.db.getConnection(function(err, connection) {
     if (err) {
@@ -202,13 +202,13 @@ console.log("-----------===",industry,call_sid,from_number,to_number,uri,transcr
   console.log("getBotUser function finished")
   return deferred.promise;
 }
-Adapter.prototype.inserttranscriptions = function(rsid,trans_text,callback) {
+Adapter.prototype.inserttranscriptions = function(rsid, trans_text, callback) {
 
 
 
     const query = "INSERT INTO alexa_transcriptions(rsid,transcription)" +
       "VALUES( " + this.db.escape(rsid) + "," + this.db.escape(trans_text) + ")";
-   console.log(query)
+    console.log(query)
     var deferred = Q.defer();
     this.db.getConnection(function(err, connection) {
       if (err) {
@@ -229,36 +229,36 @@ Adapter.prototype.inserttranscriptions = function(rsid,trans_text,callback) {
     console.log("getBotUser function finished")
     return deferred.promise;
   }
- //    Adapter.prototype.updatesentiment = function(pos,neg,label,rsid,callback) {
- // const query = 'UPDATE alexa_recordings SET sentiment_positivity='+ this.db.escape(pos) +',sentiment_negitivity='+ this.db.escape(neg) +',label='+ this.db.escape(label) +' WHERE rsid=' +  this.db.escape(rsid)  + ';'
- // console.log(query)
- //  var deferred = Q.defer();
- //  this.db.getConnection(function(err, connection) {
- //    if (err) {
- //      deferred.reject(err);
- //    } else {
- //      connection.query(query, [], function(err, results) {
- //        console.log(err, results)
- //        if (err) {
- //          console.log(err)
- //        } else {
- //          callback(results)
- //        }
- //        // connection.release();
- //        // if (err) {
- //        //   deferred.reject(err);
- //        // } else {
- //        //   // console.log(results)
- //        //   callback("updated successfully")
- //        //   // deferred.resolve(results);
- //        // }
- //      });
- //    }
+  //    Adapter.prototype.updatesentiment = function(pos,neg,label,rsid,callback) {
+  // const query = 'UPDATE alexa_recordings SET sentiment_positivity='+ this.db.escape(pos) +',sentiment_negitivity='+ this.db.escape(neg) +',label='+ this.db.escape(label) +' WHERE rsid=' +  this.db.escape(rsid)  + ';'
+  // console.log(query)
+  //  var deferred = Q.defer();
+  //  this.db.getConnection(function(err, connection) {
+  //    if (err) {
+  //      deferred.reject(err);
+  //    } else {
+  //      connection.query(query, [], function(err, results) {
+  //        console.log(err, results)
+  //        if (err) {
+  //          console.log(err)
+  //        } else {
+  //          callback(results)
+  //        }
+  //        // connection.release();
+  //        // if (err) {
+  //        //   deferred.reject(err);
+  //        // } else {
+  //        //   // console.log(results)
+  //        //   callback("updated successfully")
+  //        //   // deferred.resolve(results);
+  //        // }
+  //      });
+  //    }
 
- Adapter.prototype.updatesentiment = function(pos,neg,label,rsid,callback) {
+Adapter.prototype.updatesentiment = function(pos, neg, label, rsid, callback) {
 
- const query = 'UPDATE alexa_recordings SET sentiment_positivity='+ this.db.escape(pos) +',sentiment_negitivity='+ this.db.escape(neg) +',label='+ this.db.escape(label) +' WHERE rsid=' +  this.db.escape(rsid)  + ';'
- console.log(query)
+  const query = 'UPDATE alexa_recordings SET sentiment_positivity=' + this.db.escape(pos) + ',sentiment_negitivity=' + this.db.escape(neg) + ',label=' + this.db.escape(label) + ' WHERE rsid=' + this.db.escape(rsid) + ';'
+  console.log(query)
   var deferred = Q.defer();
   this.db.getConnection(function(err, connection) {
     if (err) {
@@ -277,7 +277,7 @@ Adapter.prototype.inserttranscriptions = function(rsid,trans_text,callback) {
         } else {
           // console.log(results)
           callback("updated successfully")
-          // deferred.resolve(results);
+            // deferred.resolve(results);
         }
       });
     }
@@ -285,11 +285,11 @@ Adapter.prototype.inserttranscriptions = function(rsid,trans_text,callback) {
   console.log("getBotUser function finished")
   return deferred.promise;
 }
-Adapter.prototype.dbdetails = function(pnum,callback) {
+Adapter.prototype.dbdetails = function(pnum, callback) {
 
   const query = "SELECT * " +
     "FROM industry_expert_details " +
-    "WHERE phone_number2=" + this.db.escape(pnum)+" OR phone_number3=" + this.db.escape(pnum)+ " OR phone_number1=" + this.db.escape(pnum)
+    "WHERE phone_number2=" + this.db.escape(pnum) + " OR phone_number3=" + this.db.escape(pnum) + " OR phone_number1=" + this.db.escape(pnum)
   console.log(query)
   var deferred = Q.defer();
   this.db.getConnection(function(err, connection) {
@@ -305,7 +305,7 @@ Adapter.prototype.dbdetails = function(pnum,callback) {
           deferred.reject(err);
         } else {
           callback(results)
-     
+
           deferred.resolve(results);
         }
       });
@@ -348,9 +348,8 @@ Adapter.prototype.insert_industry_expert_details = function(name, industry, phon
 
 
 
-
   const query = "INSERT INTO industry_expert_details(name,industry,phone_number1)" +
-    "VALUES( " + this.db.escape(name) + "," + this.db.escape(industry) + "," + this.db.escape(phone_number) + ")";
+    "VALUES( " + this.db.escape(name) + "," + this.db.escape(industry) + "," + this.db.escape(phone_number1) + ")";
   console.log(query)
   var deferred = Q.defer();
   this.db.getConnection(function(err, connection) {
@@ -380,14 +379,14 @@ Adapter.prototype.insert_industry_expert_details = function(name, industry, phon
   console.log("getBotUser function finished")
   return deferred.promise;
 }
-Adapter.prototype.insert_industry_expert_details2 = function(name, industry, phone_number1,phone_number2, callback) {
+Adapter.prototype.insert_industry_expert_details2 = function(name, industry, phone_number1, phone_number2, callback) {
 
-    // return true;
+  // return true;
 
 
 
-  const query = "INSERT INTO industry_expert_details(name,industry,phone_number1)" +
-    "VALUES( " + this.db.escape(name) + "," + this.db.escape(industry) + "," + this.db.escape(phone_number) + ")";
+  const query = "INSERT INTO industry_expert_details(name,industry,phone_number1,phone_number2)" +
+    "VALUES( " + this.db.escape(name) + "," + this.db.escape(industry) + "," + this.db.escape(phone_number1) + "," + this.db.escape(phone_number2) + ")";
   console.log(query)
   var deferred = Q.defer();
   this.db.getConnection(function(err, connection) {
@@ -417,12 +416,49 @@ Adapter.prototype.insert_industry_expert_details2 = function(name, industry, pho
   console.log("getBotUser function finished")
   return deferred.promise;
 }
-Adapter.prototype.update_industry_expert_details = function(ext_id, name, industry, phone_number, callback) {
+Adapter.prototype.insert_industry_expert_details3 = function(name, industry, phone_number1, phone_number2, phone_number3, callback) {
+
+  // return true;
+
+
+
+  const query = "INSERT INTO industry_expert_details(name,industry,phone_number1,phone_number2,phone_number3)" +
+    "VALUES( " + this.db.escape(name) + "," + this.db.escape(industry) + "," + this.db.escape(phone_number1) + "," + this.db.escape(phone_number2) + "," + this.db.escape(phone_number3) + ")";
+  console.log(query)
+  var deferred = Q.defer();
+  this.db.getConnection(function(err, connection) {
+    if (err) {
+      deferred.reject(err);
+    } else {
+      connection.query(query, [], function(err, results) {
+        connection.release();
+        if (err) {
+          deferred.reject(err);
+          callback({
+            code: "400",
+            error: err
+          })
+        } else {
+          // console.log(results)
+          callback({
+              code: "200",
+              result: results
+            })
+            // callback(results)2h98ckc3
+            // deferred.resolve(results);
+        }
+      });
+    }
+  });
+  console.log("getBotUser function finished")
+  return deferred.promise;
+}
+Adapter.prototype.update_industry_expert_details = function(ext_id, name, industry, phone_number1, callback) {
   console.log(ext_name, name, industry, phone_number)
 
 
 
-  const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry=" + this.db.escape(industry) + ",phone_number1=" + this.db.escape(phone_number) + " WHERE id= " + this.db.escape(ext_id)
+  const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry=" + this.db.escape(industry) + ",phone_number1=" + this.db.escape(phone_number1) + " WHERE id= " + this.db.escape(ext_id)
 
   var deferred = Q.defer();
   this.db.getConnection(function(err, connection) {
@@ -483,7 +519,7 @@ Adapter.prototype.update_industry_expert_details_p2 = function(ext_id, name, ind
   console.log("getBotUser function finished")
   return deferred.promise;
 }
-Adapter.prototype.update_industry_expert_details_p3 = function(ext_id, name, industry, phone_number1, phone_number2,phone_number3,callback) {
+Adapter.prototype.update_industry_expert_details_p3 = function(ext_id, name, industry, phone_number1, phone_number2, phone_number3, callback) {
   const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry=" + this.db.escape(industry) + ",phone_number1=" + this.db.escape(phone_number1) + ",phone_number2=" + this.db.escape(phone_number2) + ",phone_number3=" + this.db.escape(phone_number3) + " WHERE id= " + this.db.escape(ext_id)
   console.log(query)
   var deferred = Q.defer();
@@ -518,7 +554,7 @@ Adapter.prototype.expertdetails = function(callback) {
 
   const query = "SELECT * " +
     "FROM industry_expert_details "
-   
+
   console.log(query)
   var deferred = Q.defer();
   this.db.getConnection(function(err, connection) {
@@ -532,10 +568,16 @@ Adapter.prototype.expertdetails = function(callback) {
         if (err) {
           console.log(err)
           deferred.reject(err);
-          callback({code:400,result:err})
+          callback({
+            code: 400,
+            result: err
+          })
         } else {
           callback(results)
-               callback({code:200,result:results})
+          callback({
+            code: 200,
+            result: results
+          })
 
           deferred.resolve(results);
         }
