@@ -108,60 +108,105 @@ app.post('/loginvalidation', function(req, res) {
 
 	})
 })
-app.get('/expertdetails',function(req,res){
-	db.expertdetails(function(response){
+app.get('/expertdetails', function(req, res) {
+	db.expertdetails(function(response) {
 		console.log(response)
-		// res.send(response)
-		if(response.code==200){
+			// res.send(response)
+		if (response.code == 200) {
 			res.send(response.result)
 		}
 	})
 })
 app.post('/insert_expert_details', function(req, res) {
-	console.log(req.body)
+
 	var e_name = req.body.name
-	var e_phone_number = req.body.phone_number1
+	var e_phone_number1 = req.body.phone_number1
+	var e_phone_number2 = req.body.phone_number2
+	var e_phone_number3 = req.body.phone_number3
+
+
+
 	var e_industry = req.body.industry
-	console.log(e_name, e_phone_number, e_industry)
-	db.insert_industry_expert_details(e_name, e_industry, e_phone_number, function(response) {
-		console.log(response)
-		if (response.code == "200") {
-			res.json({
-				code: "200",
-				success: "true"
-			})
-		} else {
-			res.json({
-				code: "400",
-				success: "false"
-			})
-		}
-	});
+	console.log(e_name, e_phone_number1, e_phone_number2, e_phone_number3, e_industry)
+	if (e_phone_number1 && e_phone_number2 && e_phone_number3) {
+		console.log("3")
+db.insert_industry_expert_details(e_name, e_industry, e_phone_number1,e_phone_number3, function(response) {
+			console.log(response)
+			if (response.code == "200") {
+				res.json({
+					code: "200",
+					success: "true"
+				})
+			} else {
+				res.json({
+					code: "400",
+					success: "false"
+				})
+			}
+		});
+	} else if (e_phone_number1 && e_phone_number2) {
+		console.log("2")
+db.insert_industry_expert_details(e_name, e_industry, e_phone_number1,e_phone_number2, function(response) {
+			console.log(response)
+			if (response.code == "200") {
+				res.json({
+					code: "200",
+					success: "true"
+				})
+			} else {
+				res.json({
+					code: "400",
+					success: "false"
+				})
+			}
+		});
+	} else if (e_phone_number1) {
+		console.log("1")
+		db.insert_industry_expert_details(e_name, e_industry, e_phone_number1, function(response) {
+			console.log(response)
+			if (response.code == "200") {
+				res.json({
+					code: "200",
+					success: "true"
+				})
+			} else {
+				res.json({
+					code: "400",
+					success: "false"
+				})
+			}
+		});
+
+
+	}
+	return true;
+
 });
 app.post('/edit_expert_details', function(req, res) {
 	console.log(req.body)
-	var ext_name = req.body.extname
+
+	var ext_id = req.body.ext_id
 	var new_name = req.body.name
 	var new_phone_number1 = req.body.phone_number1
 	var new_phone_number2 = req.body.phone_number2
 	var new_phone_number3 = req.body.phone_number3
 	var new_industry = req.body.industry
-	console.log(ext_name, new_name, new_industry, new_phone_number1, new_phone_number2, new_phone_number3)
+	console.log(ext_id, new_name, new_industry, new_phone_number1, new_phone_number2, new_phone_number3)
 	if (new_phone_number1 && new_phone_number2 && new_phone_number3) {
 		console.log("3")
-		db.update_industry_expert_details_p3(ext_name, new_name, new_industry, new_phone_number1, new_phone_number2, new_phone_number3, function(response) {
+		db.update_industry_expert_details_p3(ext_id, new_name, new_industry, new_phone_number1, new_phone_number2, new_phone_number3, function(response) {
 			console.log(response)
 			res.json(response)
 		})
 	} else if (new_phone_number1 && new_phone_number2) {
 		console.log("2")
-		db.update_industry_expert_details_p2(ext_name, new_name, new_industry, new_phone_number1, new_phone_number2, function(response) {
+		db.update_industry_expert_details_p2(ext_id, new_name, new_industry, new_phone_number1, new_phone_number2, function(response) {
 			console.log(response)
 			res.json(response)
 		})
 	} else if (new_phone_number1) {
 		console.log("1")
-		db.update_industry_expert_details(ext_name, new_name, new_industry, new_phone_number1, function(response) {
+		db.update_industry_expert_details(ext_id, new_name, new_industry, new_phone_number1, function(response) {
 			console.log(response)
 			res.json(response)
 		})
@@ -172,7 +217,7 @@ app.post('/edit_expert_details', function(req, res) {
 app.get('/check', function(req, res) {
 		db.dbdetails("+19188622354", function(response) {
 			console.log(response)
-	
+
 		});
 	})
 	// Create an HTTP server and listen for requests on port 3000
