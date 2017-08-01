@@ -7,9 +7,9 @@ const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
 const app = express();
 var bodyParser = require('body-parser')
-	app.use(bodyParser.urlencoded({
-		extended: true
-	}));
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 // var urlencodedParser = bodyParser.urlencoded({
 // 	extended: false
 // })
@@ -84,11 +84,11 @@ app.post('/handle_transcribe', function(req, res) {
 				var positivity = senti.probability.pos
 				var negativity = senti.probability.neg
 				var neutrality = senti.probability.neutral
-				// var label = senti.label
-				if(senti.label=="neutral"){
-var label ="pos"
-				}else{
-var label =senti.label
+					// var label = senti.label
+				if (senti.label == "neutral") {
+					var label = "pos"
+				} else {
+					var label = senti.label
 				}
 
 				db.insert(industry, call_sid, from, to, uri, TranscriptionText, positivity, negativity, neutrality, label, function(response) {
@@ -228,9 +228,14 @@ app.post('/edit_expert_details', function(req, res) {
 	}
 	return true;
 })
+app.get('/get_industry_list', function(req, res) {
+	db.industrydetails(function(response) {
+		console.log(response)
+	});
+});
 app.get('/check', function(req, res) {
 		db.dbdetails("+19188622354", function(response) {
-			console.log(response,response[0].industry)
+			console.log(response, response[0].industry)
 
 
 		});

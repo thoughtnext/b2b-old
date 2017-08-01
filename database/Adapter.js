@@ -586,4 +586,41 @@ Adapter.prototype.expertdetails = function(callback) {
   console.log("getBotUser function finished")
   return deferred.promise;
 }
+Adapter.prototype.industrydetails = function(callback) {
+
+  const query = "SELECT * " +
+    "FROM expert_industry "
+
+  console.log(query)
+  var deferred = Q.defer();
+  this.db.getConnection(function(err, connection) {
+    if (err) {
+      console.log(err)
+      deferred.reject(err);
+    } else {
+      console.log("conn successful")
+      connection.query(query, [], function(err, results) {
+        connection.release();
+        if (err) {
+          console.log(err)
+          deferred.reject(err);
+          callback({
+            code: 400,
+            result: err
+          })
+        } else {
+          callback(results)
+          callback({
+            code: 200,
+            result: results
+          })
+
+          deferred.resolve(results);
+        }
+      });
+    }
+  });
+  console.log("getBotUser function finished")
+  return deferred.promise;
+}
 module.exports = Adapter;
