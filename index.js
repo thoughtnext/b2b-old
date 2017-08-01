@@ -84,7 +84,12 @@ app.post('/handle_transcribe', function(req, res) {
 				var positivity = senti.probability.pos
 				var negativity = senti.probability.neg
 				var neutrality = senti.probability.neutral
-				var label = senti.label
+				// var label = senti.label
+				if(senti.label=="neutral"){
+var label ="pos"
+				}else{
+var label =senti.label
+				}
 
 				db.insert(industry, call_sid, from, to, uri, TranscriptionText, positivity, negativity, neutrality, label, function(response) {
 					console.log(response)
