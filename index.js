@@ -7,12 +7,12 @@ const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
 const app = express();
 var bodyParser = require('body-parser')
-	// app.use(bodyParser.urlencoded({
-	// 	extended: true
-	// }));
-var urlencodedParser = bodyParser.urlencoded({
-	extended: false
-})
+	app.use(bodyParser.urlencoded({
+		extended: true
+	}));
+// var urlencodedParser = bodyParser.urlencoded({
+// 	extended: false
+// })
 app.use(bodyParser.json())
 
 var allowCrossDomain = function(req, res, next) {
