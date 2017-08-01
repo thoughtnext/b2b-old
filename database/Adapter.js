@@ -454,7 +454,6 @@ Adapter.prototype.insert_industry_expert_details3 = function(name, industry, pho
   return deferred.promise;
 }
 Adapter.prototype.update_industry_expert_details = function(ext_id, name, industry, phone_number1, callback) {
-  console.log(ext_name, name, industry, phone_number)
 
 
 
