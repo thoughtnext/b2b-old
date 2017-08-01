@@ -59,31 +59,40 @@ app.post('/handle_transcribe', function(req, res) {
 	var rec_url = req.body.RecordingUrl
 	var rec = rec_url.replace("https://api.twilio.com", "")
 	var uri = rec + ".json"
-	if (from = '+19188622354') {
-		var industry = "education"
+		// if (from = '+19188622354') {
+		// 	var industry = "education"
 
-	} else {
-		var industry = "logistics"
-	}
+	// } else {
+	// 	var industry = "logistics"
+	// }
+	db.dbdetails(from, function(response) {
+		console.log(response)
+		if (response == "") {
+			console.log("no industry")
+		} else {
+			var industry = response[0].industry
 
-	console.log(call_sid, RecordingSid, from, to, TranscriptionText)
-	rp.post('http://text-processing.com/api/sentiment/', {
-		form: {
-			text: TranscriptionText,
+			console.log(call_sid, RecordingSid, from, to, TranscriptionText)
+			rp.post('http://text-processing.com/api/sentiment/', {
+				form: {
+					text: TranscriptionText,
 
+				}
+			}).then(function(req, res) {
+				senti = JSON.parse(req)
+				console.log(senti)
+				var positivity = senti.probability.pos
+				var negativity = senti.probability.neg
+				var neutrality = senti.probability.neutral
+				var label = senti.label
+
+				db.insert(industry, call_sid, from, to, uri, TranscriptionText, positivity, negativity, neutrality, label, function(response) {
+					console.log(response)
+				});
+				// arr.push({rsid:element.rsid,pos:senti.probability.pos,neg:senti.probability.neg,label:senti.label})
+			});
 		}
-	}).then(function(req, res) {
-		senti = JSON.parse(req)
-		console.log(senti)
-		var positivity = senti.probability.pos
-		var negativity = senti.probability.neg
-		var neutrality = senti.probability.neutral
-		var label = senti.label
 
-		db.insert(industry, call_sid, from, to, uri, TranscriptionText, positivity, negativity, neutrality, label, function(response) {
-			console.log(response)
-		});
-		// arr.push({rsid:element.rsid,pos:senti.probability.pos,neg:senti.probability.neg,label:senti.label})
 	});
 
 });
@@ -216,7 +225,8 @@ app.post('/edit_expert_details', function(req, res) {
 })
 app.get('/check', function(req, res) {
 		db.dbdetails("+19188622354", function(response) {
-			console.log(response)
+			console.log(response,response[0].industry)
+
 
 		});
 	})
