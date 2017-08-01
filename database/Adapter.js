@@ -572,7 +572,7 @@ Adapter.prototype.expertdetails = function(callback) {
             result: err
           })
         } else {
-          callback(results)
+          
           callback({
             code: 200,
             result: results
@@ -609,7 +609,7 @@ Adapter.prototype.industrydetails = function(callback) {
             result: err
           })
         } else {
-          callback(results)
+          
           callback({
             code: 200,
             result: results
