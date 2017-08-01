@@ -588,7 +588,7 @@ Adapter.prototype.expertdetails = function(callback) {
 }
 Adapter.prototype.industrydetails = function(callback) {
 
-  const query = "SELECT * " +
+  const query = "SELECT industry,industry_id " +
     "FROM expert_industry "
 
   console.log(query)
