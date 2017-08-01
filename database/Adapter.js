@@ -458,7 +458,7 @@ Adapter.prototype.update_industry_expert_details = function(ext_id, name, indust
 
 
 
-  const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry=" + this.db.escape(industry) + ",phone_number1=" + this.db.escape(phone_number1) + " WHERE id= " + this.db.escape(ext_id)
+  const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry=" + this.db.escape(industry) + ",phone_number1=" + this.db.escape(phone_number1) + ",phone_number2=" + this.db.escape("") + ",phone_number3=" + this.db.escape("") + " WHERE id= " + this.db.escape(ext_id)
 
   var deferred = Q.defer();
   this.db.getConnection(function(err, connection) {
@@ -489,7 +489,7 @@ Adapter.prototype.update_industry_expert_details = function(ext_id, name, indust
   return deferred.promise;
 }
 Adapter.prototype.update_industry_expert_details_p2 = function(ext_id, name, industry, phone_number1, phone_number2, callback) {
-  const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry=" + this.db.escape(industry) + ",phone_number1=" + this.db.escape(phone_number1) + ",phone_number2=" + this.db.escape(phone_number2) + " WHERE id= " + this.db.escape(ext_id)
+  const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry=" + this.db.escape(industry) + ",phone_number1=" + this.db.escape(phone_number1) + ",phone_number2=" + this.db.escape(phone_number2) + ",phone_number3=" + this.db.escape("") + " WHERE id= " + this.db.escape(ext_id)
   console.log(query)
   var deferred = Q.defer();
   this.db.getConnection(function(err, connection) {
