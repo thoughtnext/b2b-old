@@ -204,23 +204,23 @@ app.post('/edit_expert_details', function(req, res) {
 	var new_phone_number1 = req.body.phone_number1
 	var new_phone_number2 = req.body.phone_number2
 	var new_phone_number3 = req.body.phone_number3
-	var new_industry = req.body.industry
-	console.log(ext_id, new_name, new_industry, new_phone_number1, new_phone_number2, new_phone_number3)
+	var new_industry_id = req.body.industry_id
+	console.log(ext_id, new_name, new_industry_id, new_phone_number1, new_phone_number2, new_phone_number3)
 	if (new_phone_number1 && new_phone_number2 && new_phone_number3) {
 		console.log("3")
-		db.update_industry_expert_details_p3(ext_id, new_name, new_industry, new_phone_number1, new_phone_number2, new_phone_number3, function(response) {
+		db.update_industry_expert_details_p3(ext_id, new_name, new_industry_id, new_phone_number1, new_phone_number2, new_phone_number3, function(response) {
 			console.log(response)
 			res.json(response)
 		})
 	} else if (new_phone_number1 && new_phone_number2) {
 		console.log("2")
-		db.update_industry_expert_details_p2(ext_id, new_name, new_industry, new_phone_number1, new_phone_number2, function(response) {
+		db.update_industry_expert_details_p2(ext_id, new_name, new_industry_id, new_phone_number1, new_phone_number2, function(response) {
 			console.log(response)
 			res.json(response)
 		})
 	} else if (new_phone_number1) {
 		console.log("1")
-		db.update_industry_expert_details(ext_id, new_name, new_industry, new_phone_number1, function(response) {
+		db.update_industry_expert_details(ext_id, new_name, new_industry_id, new_phone_number1, function(response) {
 			console.log(response)
 			res.json(response)
 		})
