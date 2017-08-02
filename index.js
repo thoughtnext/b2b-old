@@ -229,10 +229,10 @@ app.post('/edit_expert_details', function(req, res) {
 	return true;
 })
 app.get('/get_industry_list', function(req, res) {
-	db.industrydetails(function(response) {
-		console.log(response)
-		res.send(response)
-	});
+	// db.industrydetails(function(response) {
+	// 	console.log(response)
+	// 	res.send(response)
+	// });
 });
 app.get('/check', function(req, res) {
 		db.dbdetails("+19188622354", function(response) {
