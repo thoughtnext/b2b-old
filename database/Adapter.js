@@ -455,11 +455,11 @@ Adapter.prototype.insert_industry_expert_details3 = function(name, industry_id, 
   console.log("getBotUser function finished")
   return deferred.promise;
 }
-Adapter.prototype.update_industry_expert_details = function(ext_id, name, industry, phone_number1, callback) {
+Adapter.prototype.update_industry_expert_details = function(ext_id, name, industry_id, phone_number1, callback) {
 
 
 
-  const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry=" + this.db.escape(industry) + ",phone_number1=" + this.db.escape(phone_number1) + ",phone_number2=" + this.db.escape(null) + ",phone_number3=" + this.db.escape(null) + " WHERE id= " + this.db.escape(ext_id)
+  const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry_id=" + this.db.escape(industry_id) + ",phone_number1=" + this.db.escape(phone_number1) + " WHERE id= " + this.db.escape(ext_id)  
 
   var deferred = Q.defer();
   this.db.getConnection(function(err, connection) {
@@ -489,8 +489,8 @@ Adapter.prototype.update_industry_expert_details = function(ext_id, name, indust
   console.log("getBotUser function finished")
   return deferred.promise;
 }
-Adapter.prototype.update_industry_expert_details_p2 = function(ext_id, name, industry, phone_number1, phone_number2, callback) {
-  const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry=" + this.db.escape(industry) + ",phone_number1=" + this.db.escape(phone_number1) + ",phone_number2=" + this.db.escape(phone_number2) + ",phone_number3=" + this.db.escape("") + " WHERE id= " + this.db.escape(ext_id)
+Adapter.prototype.update_industry_expert_details_p2 = function(ext_id, name, industry_id, phone_number1, phone_number2, callback) {
+  const query = "UPDATE industry_expert_details SET name=" + this.db.escape(name) + ",industry_id=" + this.db.escape(industry_id) + ",phone_number1=" + this.db.escape(phone_number1) + ",phone_number2=" + this.db.escape(phone_number2) + " WHERE id= " + this.db.escape(ext_id)  
   console.log(query)
   var deferred = Q.defer();
   this.db.getConnection(function(err, connection) {
