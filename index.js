@@ -140,7 +140,7 @@ app.post('/insert_expert_details', function(req, res) {
 
 
 
-	var e_industry = req.body.industry
+	var e_industry = req.body.industry_id
 	console.log(e_name, e_phone_number1, e_phone_number2, e_phone_number3, e_industry)
 	if (e_phone_number1 && e_phone_number2 && e_phone_number3) {
 		console.log("3")

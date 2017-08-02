@@ -416,14 +416,14 @@ Adapter.prototype.insert_industry_expert_details2 = function(name, industry, pho
   console.log("getBotUser function finished")
   return deferred.promise;
 }
-Adapter.prototype.insert_industry_expert_details3 = function(name, industry, phone_number1, phone_number2, phone_number3, callback) {
+Adapter.prototype.insert_industry_expert_details3 = function(name, industry_id, phone_number1, phone_number2, phone_number3, callback) {
 
   // return true;
 
 
 
-  const query = "INSERT INTO industry_expert_details(name,industry,phone_number1,phone_number2,phone_number3)" +
-    "VALUES( " + this.db.escape(name) + "," + this.db.escape(industry) + "," + this.db.escape(phone_number1) + "," + this.db.escape(phone_number2) + "," + this.db.escape(phone_number3) + ")";
+  const query = "INSERT INTO industry_expert_details(name,industry_id,phone_number1,phone_number2,phone_number3)" +
+    "VALUES( " + this.db.escape(name) + "," + this.db.escape(industry_id) + "," + this.db.escape(phone_number1) + "," + this.db.escape(phone_number2) + "," + this.db.escape(phone_number3) + ")";
   console.log(query)
   var deferred = Q.defer();
   this.db.getConnection(function(err, connection) {
