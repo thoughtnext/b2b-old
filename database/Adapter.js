@@ -387,7 +387,7 @@ Adapter.prototype.insert_industry_expert_details2 = function(name, industry_id, 
 
   // const query = "INSERT INTO industry_expert_details(name,industry,phone_number1,phone_number2)" +
   //   "VALUES( " + this.db.escape(name) + "," + this.db.escape(industry) + "," + this.db.escape(phone_number1) + "," + this.db.escape(phone_number2) + ")";
-  const query = "INSERT INTO industry_expert_details(name,industry_id,phone_number1,phone_number2,phone_number3)" +
+  const query = "INSERT INTO industry_expert_details(name,industry_id,phone_number1,phone_number2)" +
     "VALUES( " + this.db.escape(name) + "," + this.db.escape(industry_id) + "," + this.db.escape(phone_number1) + "," + this.db.escape(phone_number2) +")";
   console.log(query)
   var deferred = Q.defer();
