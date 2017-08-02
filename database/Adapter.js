@@ -589,7 +589,7 @@ Adapter.prototype.expertdetails = function(callback) {
 }
 Adapter.prototype.industrydetails = function(callback) {
 
-  const query = "SELECT industry_expert_details.id as industry_expert_id, industry_expert_details.name as industry_expert_name, industry_expert_details.phone_number1, industry_expert_details.phone_number2, industry_expert_details.phone_number3,expert_industry.id as industry_id, expert_industry.name as industry_name FROM `industry_expert_details` INNER JOIN expert_industry ON industry_expert_details.industry_id = expert_industry.id"
+  const query = "SELECT * FROM expert_industry"
 
   console.log(query)
   var deferred = Q.defer();
